@@ -2,5 +2,5 @@ from method import Method
 
 
 class Newton(Method):
-    def __init__(self, key, e):
+    def __init__(self, key: callable, e: float) -> None:
         pass
