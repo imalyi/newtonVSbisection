@@ -31,44 +31,41 @@ Pobrać od użytkownika żądaną dokładność $0<\varepsilon<1$ oraz przedzia�
 
 Porównać liczbę kroków potrzebnych metodzie siecznych Newtona, by osiągnąć dokładność $\varepsilon$ z~liczbą kroków dla metody bisekcji dla kilku wybranych przedziałów zawierających dokładnie jeden pierwiastek. Znaleźć wszystkie pierwiastki równania z~dokładnością $10^{-8}$.
 
-\section{Teoretyczny opis metody}
-
-
+\section{Teoretyczny opis metod}
 \subsection{Metoda siecznych Newtona}
 Metoda siecznych Newtona to jedna z~metod numerycznych służących do znajdowania miejsc zerowych funkcji. Metoda ta polega na przybliżaniu pierwiastka równania poprzez konstrukcję linii siecznej przechodzącej przez dwa punkty na wykresie funkcji i~wyznaczeniu jej przecięcia z~osią OX. Następnie punkt ten jest wykorzystywany w~kolejnej iteracji metody, aż do uzyskania dostatecznie dokładnego wyniku.
 
 W~metodzie siecznych Newtona w~każdej iteracji przybliżenie pierwiastka równania jest obliczane jako przecięcie linii siecznej z~osią OX, zdefiniowanej jako:
 
-$$x_{n+1} = x_n - \frac{f(x_n)(x_n-x_{n-1})}{f(x_n)-f(x_{n-1})}$$
+$$x_{n+1} = x_n - \frac{f(x_n)(x_n-x_{n-1})}{f(x_n)-f(x_{n-1})},\ n\geq1$$
 
 gdzie $x_n$ i $x_{n-1}$ są kolejnymi przybliżeniami pierwiastka równania, a~$f(x)$ jest funkcją, której pierwiastka szukamy.
 
 \begin{example}
-Rozważmy równanie $x^2 - 2 = 0$, dla którego pierwiastkiem jest $\sqrt{2}$. Chcemy znaleźć pierwiastek tego równania z~dokładnością $\varepsilon = 10^{-4}$.
+Rozważmy równanie $x^2 - 2 = 0$, dla którego pierwiastkiem jest $\sqrt{2}$. Chcemy znaleźć pierwiastek tego równania z~dokładnością $\varepsilon = 0.1$.
 
 Zacznijmy od wybrania dwóch początkowych przybliżeń pierwiastka równania, na przykład $x_0 = 1$ i~$x_1 = 2$. Następnie stosujemy wzór metody siecznych Newtona:
 
-$$x_{n+1} = x_n - \frac{f(x_n)(x_n-x_{n-1})}{f(x_n)-f(x_{n-1})}$$
+$$x_{n+1} = x_n - \frac{f(x_n)(x_n-x_{n-1})}{f(x_n)-f(x_{n-1})},\ n\geq1$$
 
 Dla $n=0$ mamy:
 \begin{align*}
     &f(x_0) = 1^2 - 2 = -1\\
     &f(x_1) = 2^2 - 2 = 2\\
-    &x_{2} = 2 - \frac{2\cdot (2-1)}{2-(-1)} = \frac{5}{3} \approx 1.6667
+    &x_{2} = 2 - \frac{2\cdot (2-1)}{2-(-1)} = \frac{4}{3} \approx 1.33333
 \end{align*}
-
 
 Dla $n=1$ mamy:
 \begin{align*}
     &f(x_1) = 2^2 - 2 = 2\\
-    &f(x_2) = \left(\frac{5}{3}\right)^2 - 2 \approx -0.1111\\
-    &x_{3} = \frac{5}{3} - \frac{(-0.1111) \cdot \left(\frac{5}{3}-2\right)}{(-0.1111)-2} \approx 1.4143
+    &f(x_2) = \left(\frac{4}{3}\right)^2 - 2 \approx -0.22222\\
+    &x_{3} = \frac{4}{3} - \frac{(-0.22222) \cdot \left(\frac{4}{3}-2\right)}{(-0.22222)-2} \approx 1,39999
 \end{align*}
 
 Teraz obliczamy różnicę między kolejnymi przybliżeniami:
-$$|x_{3} - x_{2}| = |1.4143 - 1.6667| \approx 0.2524$$
+$$|x_{3} - x_{2}| = |1,39999 - 1.33333| \approx 0,06666$$
 
-Ponieważ wartość ta jest mniejsza niż zadana dokładność $\varepsilon = 10^{-4}$, kończymy obliczenia i~zwracamy ostatnie przybliżenie $x_3 = 1.4143$ jako przybliżenie rozwiązania.
+Ponieważ wartość ta jest mniejsza niż zadana dokładność $\varepsilon = 0.1$, kończymy obliczenia i~zwracamy ostatnie przybliżenie $x_3 = 1,39999$ jako przybliżenie rozwiązania.
 \end{example}
 
 \subsection{Metoda bisekcji}
@@ -80,7 +77,7 @@ Dla funkcji ciągłej $f$ określonej na przedziale domkniętym $[a,b]$ oraz spe
 \item Jeśli $f(c_i) = 0$, kończymy obliczenia i zwracamy $c_i$ jako rozwiązanie.
 \item Jeśli $f(a_i) \cdot f(c_i) < 0$, ustawiamy $a_{i+1} = a_i$ oraz $b_{i+1} = c_i$.
 \item W przeciwnym przypadku, gdy $f(b_i) \cdot f(c_i) < 0$, ustawiamy $a_{i+1} = c_i$ oraz $b_{i+1} = b_i$.
-\item Jeśli osiągnięto zadany poziom dokładności (czyli $|b_i - a_i| < \epsilon$, gdzie $\epsilon$ to ustalona wartość dokładności), zwracamy $c_i$ jako rozwiązanie.
+\item Jeśli osiągnięto zadany poziom dokładności (czyli $|b_i - a_i| < \varepsilon$, gdzie $\varepsilon$ to ustalona wartość dokładności), zwracamy $c_i$ jako rozwiązanie.
 \item W przeciwnym przypadku, ustawiamy $i = i + 1$ i wracamy do kroku 2.
 \end{enumerate}
 
@@ -95,41 +92,41 @@ W celu znalezienia pierwiastka $F(x) = 0$ z dokładnością $\varepsilon = 0.1$ 
 \begin{enumerate}
     \item Iteracja:\\
     \begin{align*}
-        &x_1=1,\ x_2=2\\
-        &x=\frac{x_1+x_2}{2}=\frac{1+2}{2}=1.5\\
-        &y=F(x)=F(1.5)=-1.375\\
-        &|F(x)|>\varepsilon\\
-        &y_1=F(x_1)=F(1)=1\\
-        &y\cdot y_1=-1.375<0\rightarrow x_2=x=1.5
+        &a_0=1,\ b_0=2\\
+        &c_0=\frac{a_0+b_0}{2}=\frac{1+2}{2}=1.5\\
+        &y=F(c_0)=F(1.5)=-1.375\\
+        &|F(c_0)|>\varepsilon\\
+        &y_1=F(a_0)=F(1)=1\\
+        &y\cdot y_1=-1.375<0\rightarrow x=c_0=1.5
     \end{align*}
     
     \item Iteracja:\\
     \begin{align*}
-        &x_1=1,\ x_2=1.5\\
-        &x=\frac{x_1+x_2}{2}=\frac{1+1.5}{2}=1.25\\
-        &y=F(x)=F(1.25)=-0.234\\
-        &|F(x)|>\varepsilon\\
-        &y_1=F(x_1)=F(1)=1\\
-        &y\cdot y_1=-0.234<0\rightarrow x_2=x=1.25
+        &a_1=1,\ b_1=1.5\\
+        &c_1=\frac{a_1+b_1}{2}=\frac{1+1.5}{2}=1.25\\
+        &y=F(c_1)=F(1.25)=-0.234\\
+        &|F(c_1)|>\varepsilon\\
+        &y_1=F(a_1)=F(1)=1\\
+        &y\cdot y_1=-0.234<0\rightarrow x=b_1=1.25
     \end{align*}
 
     
     \item Iteracja:\\
     \begin{align*}
-        &x_1=1,\ x_2=1.25\\
-        &x=\frac{x_1+x_2}{2}=\frac{1+1.25}{2}=1.125\\
-        &y=F(x)=F(1.125)=0.376\\
-        &|F(x)|>\varepsilon\\
-        &y_1=F(x_1)=F(1)=1\\
-        &y\cdot y_1=1.125>0\rightarrow x_1=x=1.125
+        &a_2=1,\ b_2=1.25\\
+        &c_2=\frac{a_2+b_2}{2}=\frac{1+1.25}{2}=1.125\\
+        &y=F(c_2)=F(1.125)=0.376\\
+        &|F(c_2)|>\varepsilon\\
+        &y_1=F(a_2)=F(1)=1\\
+        &y\cdot y_1=1.125>0\rightarrow x=a_2=1.125
     \end{align*}
     
     \item Iteracja:\\
     \begin{align*}
-        &x_1=1.125,\ x_2=1.25\\
-        &x=\frac{x_1+x_2}{2}=\frac{1.125+1.25}{2}=1.1875\\
-        &y=F(x)=F(1.1875)=0.069\\
-        &|F(x)|<\varepsilon\\
+        &a_3=1.125,\ b_3=1.25\\
+        &c_3=\frac{a_3+b_3}{2}=\frac{1.125+1.25}{2}=1.1875\\
+        &y=F(c_3)=F(1.1875)=0.069\\
+        &|F(c_3)|<\varepsilon\\
     \end{align*}
 \end{enumerate}
 
