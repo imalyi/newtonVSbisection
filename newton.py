@@ -6,8 +6,8 @@ class Newton(Method):
         self.key = key
         self.e = e
 
-    def solution(self):
-        x_prev= 0
+    def solution(self) -> (float, int):
+        x_prev = 0
         x = 1
         steps = 0
         while not self._check_diff(x, x_prev):
