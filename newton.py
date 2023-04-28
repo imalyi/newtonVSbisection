@@ -1,7 +1,14 @@
 from method import Method
 
+
 class IterationLimit(Exception):
+    """Occurs when """
     pass
+
+class BadInterval(Exception):
+    "Occurs when divide by zero"
+    pass
+
 
 class Newton(Method):
     def __init__(self, key: callable, x_1: float, x_2: float, e: float, max_step: int = 45) -> None:
@@ -16,7 +23,10 @@ class Newton(Method):
         while not self._check_diff(self.x_2, self.x_1):
             if steps > self.max_steps:
                 raise IterationLimit
-            tmp = self._calc_next_x(self.x_1, self.x_2)
+            try:
+                tmp = self._calc_next_x(self.x_1, self.x_2)
+            except ZeroDivisionError:
+                raise BadInterval
             self.x_1 = self.x_2
             self.x_2 = tmp
             steps += 1
@@ -32,5 +42,5 @@ class Newton(Method):
 
 if __name__ == "__main__":
     print("Test example: x^2 - 2 = 0")
-    n = Newton(lambda x: (x*x -2), 1, 2, pow(10, -4), 3)
+    n = Newton(lambda x: (x*x -2), 1, 2, pow(10, -4), 30)
     print(n.solution())
