@@ -2,25 +2,20 @@ from method import Method
 
 
 class Newton(Method):
-    def __init__(self, key: callable, e: float) -> None:
+    def __init__(self, key: callable, x_1: float, x_2: float, e: float) -> None:
         self.key = key
         self.e = e
+        self.x_1 = x_1
+        self.x_2 = x_2
 
     def solution(self) -> (float, int):
-        x_prev = 0
-        x = 1
         steps = 0
-        while not self._check_diff(x, x_prev):
-            tmp = self._calc_next_x(x_prev, x)
-            x_prev = x
-            x = tmp
+        while not self._check_diff(self.x_2, self.x_1):
+            tmp = self._calc_next_x(self.x_1, self.x_2)
+            self.x_1 = self.x_2
+            self.x_2 = tmp
             steps += 1
-        return x, steps
-    def generate_chart(self):
-        return 0
-
-    def step_number(self) -> int:
-        return 0
+        return self.x_2, steps
 
     def _calc_next_x(self, x_prev: float, x: float) -> float:
         return x - ((self.key(x) * (x-x_prev)) / (self.key(x) - self.key(x_prev)))
@@ -30,11 +25,8 @@ class Newton(Method):
         return self.diff < self.e
 
 
-import math
-def key(x):
-    return x*x - 2
-
-
 if __name__ == "__main__":
-    n = Newton(key, math.pow(10, -12))
+    print("Test example: x^2 - 2 = 0")
+    n = Newton(lambda x: x*x -2 , 1, 2, pow(10, -12))
     print(n.solution())
+    #(1.414213562373095, 7)
