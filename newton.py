@@ -39,6 +39,9 @@ class Newton(Method):
         self.diff = abs(x-x_prev)
         return self.diff < self.e
 
+    def __str__(self):
+        return 'Newton'
+
 
 if __name__ == "__main__":
     print("Test example: x^2 - 2 = 0")
