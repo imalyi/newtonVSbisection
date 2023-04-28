@@ -14,15 +14,15 @@ class Bisection(Method):
             print("Błąd! f(a)*f(b)>=0. Proszę wybrać inny przedział [a,b].")
             return 0,0
         c = 1
-        i = 0
+        step = 0
         while self.function(c)!=0 and self.section[1]-self.section[0]>self.e:
             c = (self.section[0]+self.section[1])/2
             if self.function(self.section[0])*self.function(c)<0:
                 self.section[1]=c
-            elif self.function(self.section[1])*self.function(c)<0:
+            else:
                 self.section[0]=c
-            i=i+1
-        return c,i
+            step=step+1
+        return c,step
 
     def generate_chart(self):
         return

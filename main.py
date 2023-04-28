@@ -22,6 +22,10 @@ def findRoot():
     bisect = Bisection(key, [a, b], e)
     answer = bisect.solution()
     print("Bisekcja: Pierwiastek równania to ", answer[0], ",obliczone w ", answer[1], " krokach.")
+    newton = Newton(key,a,b,e)
+    answer = newton.solution()
+    print("Newton: Pierwiastek równania to ", answer[0], ",obliczone w ", answer[1], " krokach.")
+
 
 def findAllRoots(a,b,precision):
     c = a
@@ -31,6 +35,9 @@ def findAllRoots(a,b,precision):
             bisect = Bisection(key,[a,c],math.pow(10,-8))
             answer = bisect.solution()
             print("Bisekcja: Pierwiastek równania to ", answer[0], ",obliczone w ", answer[1], " krokach.")
+            newton = Newton(key, a, b, math.pow(10,-8))
+            answer = newton.solution()
+            print("Newton: Pierwiastek równania to ", answer[0], ",obliczone w ", answer[1], " krokach.")
             a = c
 
 def main():
