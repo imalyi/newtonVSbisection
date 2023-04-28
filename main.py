@@ -13,8 +13,13 @@ def menu():
     print("3. Wyjdź")
 
 def findRoot():
-    print("Wpisz e")
-    e = float(input())
+    e = 0
+    while e==0:
+        print("Wpisz e")
+        e = float(input())
+        if e<=0 or e>=1:
+            print("Dokładność nie mieści się w przedziale (0;1)")
+            e = 0
     print("Wpisz a (początek przedziału)")
     a = float(input())
     print("Wpisz b (koniec przedziału)")
