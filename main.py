@@ -38,19 +38,22 @@ def findRoot():
 
 def findAllRoots(a,b,precision):
     c = a
+    answers = []
     while c<=b:
         c += precision
         if key(a)*key(c)<0:
             bisect = Bisection(key,[a,c],math.pow(10,-8))
             answer = bisect.solution()
-            print("Bisekcja: Pierwiastek równania to ", answer[0], ",obliczone w ", answer[1], " krokach.")
+            answers.append(answer)
             try:
                 newton = Newton(key, a, b, math.pow(10,-8))
                 answer = newton.solution()
-                print("Newton: Pierwiastek równania to ", answer[0], ",obliczone w ", answer[1], " krokach.")
+                answers.append(answer)
             except IterationLimit:
                 pass
             a = c
+    for x in answers:
+        print("Pierwiastek = ",x[0],"Obliczone w",x[1],"krokach")
 
 def main():
     cont = True
