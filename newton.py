@@ -1,16 +1,21 @@
 from method import Method
 
+class IterationLimit(Exception):
+    pass
 
 class Newton(Method):
-    def __init__(self, key: callable, x_1: float, x_2: float, e: float) -> None:
+    def __init__(self, key: callable, x_1: float, x_2: float, e: float, max_step: int = 45) -> None:
         self.key = key
         self.e = e
         self.x_1 = x_1
         self.x_2 = x_2
+        self.max_steps = max_step
 
     def solution(self) -> (float, int):
         steps = 0
         while not self._check_diff(self.x_2, self.x_1):
+            if steps > self.max_steps:
+                raise IterationLimit
             tmp = self._calc_next_x(self.x_1, self.x_2)
             self.x_1 = self.x_2
             self.x_2 = tmp
@@ -27,6 +32,5 @@ class Newton(Method):
 
 if __name__ == "__main__":
     print("Test example: x^2 - 2 = 0")
-    n = Newton(lambda x: x*x -2 , 1, 2, pow(10, -12))
+    n = Newton(lambda x: (x*x -2), 1, 2, pow(10, -4), 3)
     print(n.solution())
-    #(1.414213562373095, 7)
