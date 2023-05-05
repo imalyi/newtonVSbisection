@@ -22,7 +22,7 @@ class Bisection(Method):
             else:
                 self.section[0]=c
             step=step+1
-        return c,step
+        return c,step,"Bisekcja"
 
     def generate_chart(self):
         return

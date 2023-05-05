@@ -30,7 +30,7 @@ class Newton(Method):
             self.x_1 = self.x_2
             self.x_2 = tmp
             steps += 1
-        return self.x_2, steps
+        return self.x_2, steps, "Newton"
 
     def _calc_next_x(self, x_prev: float, x: float) -> float:
         return x - ((self.key(x) * (x-x_prev)) / (self.key(x) - self.key(x_prev)))

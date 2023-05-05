@@ -37,23 +37,24 @@ def findRoot():
 
 
 def findAllRoots(a,b,precision):
-    c = a
+    c = b
     answers = []
-    while c<=b:
-        c += precision
-        if key(a)*key(c)<0:
-            bisect = Bisection(key,[a,c],math.pow(10,-8))
+    while c>=a:
+        c -= precision
+        if key(b)*key(c)<0:
+            bisect = Bisection(key,[c,b],math.pow(10,-8))
             answer = bisect.solution()
             answers.append(answer)
             try:
-                newton = Newton(key, a, b, math.pow(10,-8))
+                newton = Newton(key, b, c, math.pow(10,-8))
                 answer = newton.solution()
                 answers.append(answer)
             except IterationLimit:
                 pass
-            a = c
+            b = c
+    answers = sorted(answers, key=lambda x: x[0], reverse=False)
     for x in answers:
-        print("Pierwiastek = ",x[0],"Obliczone w",x[1],"krokach")
+        print(x[2],": Pierwiastek = ",x[0],"Obliczone w",x[1],"krokach.")
 
 def main():
     cont = True
