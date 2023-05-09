@@ -58,15 +58,21 @@ def findAllRoots(a,b,precision):
 
 def main():
     cont = True
-    while(cont):
+    while cont:
         menu()
-        choice = int(input())
-        if choice == 1:
-            findRoot()
-        if choice == 2:
-            findAllRoots(-10,10,0.001)
-        if choice == 3:
-            cont = False
+        try:
+            choice = int(input())
+            if choice == 1:
+                findRoot()
+            elif choice == 2:
+                findAllRoots(-10, 10, 0.001)
+            elif choice == 3:
+                cont = False
+            else:
+                print("Nieprawidłowa wartość. Podaj liczbę 1, 2 lub 3.")
+        except ValueError:
+            print("Nieprawidłowy znak. Podaj liczbę 1, 2 lub 3.")
+
 
 
 if __name__ == "__main__":
