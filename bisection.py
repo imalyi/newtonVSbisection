@@ -9,8 +9,11 @@ class Bisection(Method):
         pass
 
     def solution(self) -> (float, int):
+        if self.section[0]==0 or self.section[1]==0:
+            print("Błąd! Funkcja jest nieokreślona w punkcie 0. Proszę wybrać punkty a,b różne od 0.")
+            return 0, 0
         if (self.function(self.section[0]) * self.function(self.section[1]) >= 0):
-            print("Błąd! f(a)*f(b)>=0. Proszę wybrać inny przedział [a,b].")
+            print("Bisekcja: Błąd! f(a)*f(b)>=0. Proszę wybrać inny przedział [a,b].")
             return 0, 0
         c = 1
         step = 0

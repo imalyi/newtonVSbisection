@@ -26,11 +26,14 @@ def findRoot():
     b = float(input())
     bisect = Bisection(key, [a, b], e)
     answer = bisect.solution()
-    print("Bisekcja: Pierwiastek równania to ", answer[0], ",obliczone w ", answer[1], " krokach.")
+    if answer[1]>0:
+        print("Bisekcja: Pierwiastek równania to ", answer[0], ",obliczone w ", answer[1], " krokach.")
     try:
         newton = Newton(key,a,b,e)
-        answer = newton.solution()
-        print("Newton: Pierwiastek równania to ", answer[0], ",obliczone w ", answer[1], " krokach.")
+        answer2 = newton.solution()
+        print("Newton: Pierwiastek równania to ", answer2[0], ",obliczone w ", answer2[1], " krokach.")
+        if answer2[0]-answer[0]>e:
+            print("Uwaga, prawdopodobnie na przedziale [",a,",",b,"] znajduje sie więcej niż jeden punkt zerowy funkcji.")
     except IterationLimit:
         pass
 
