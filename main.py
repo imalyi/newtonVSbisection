@@ -14,16 +14,35 @@ def menu():
 
 def findRoot():
     e = 0
+    print("Wpisz e (dokładność)")
     while e==0:
-        print("Wpisz e")
-        e = float(input())
+        try:
+            e = float(input())
+        except ValueError:
+            print("Nieprawidłowy znak. Podaj liczbę zmiennoprzecinkową.")
+            continue
         if e<=0 or e>=1:
             print("Dokładność nie mieści się w przedziale (0;1)")
             e = 0
     print("Wpisz a (początek przedziału)")
-    a = float(input())
+    while True:
+        try:
+            a = float(input())
+            break
+        except ValueError:
+            print("Nieprawidłowy znak. Podaj liczbę zmiennoprzecinkową.")
+            continue
     print("Wpisz b (koniec przedziału)")
-    b = float(input())
+    while True:
+        try:
+            b = float(input())
+            if b<=a:
+                print("b musi być większe od a!")
+                continue
+            break
+        except ValueError:
+            print("Nieprawidłowy znak. Podaj liczbę zmiennoprzecinkową.")
+            continue
     bisect = Bisection(key, [a, b], e)
     answer = bisect.solution()
     if answer[1]>0:
@@ -32,7 +51,7 @@ def findRoot():
         newton = Newton(key,a,b,e)
         answer2 = newton.solution()
         print("Newton: Pierwiastek równania to ", answer2[0], ",obliczone w ", answer2[1], " krokach.")
-        if answer2[0]-answer[0]>e:
+        if answer2[0]-answer[0]>e and answer[1]>0:
             print("Uwaga, prawdopodobnie na przedziale [",a,",",b,"] znajduje sie więcej niż jeden punkt zerowy funkcji.")
     except IterationLimit:
         pass
@@ -65,16 +84,17 @@ def main():
         menu()
         try:
             choice = int(input())
-            if choice == 1:
-                findRoot()
-            elif choice == 2:
-                findAllRoots(-10, 10, 0.001)
-            elif choice == 3:
-                cont = False
-            else:
-                print("Nieprawidłowa wartość. Podaj liczbę 1, 2 lub 3.")
         except ValueError:
             print("Nieprawidłowy znak. Podaj liczbę 1, 2 lub 3.")
+            continue
+        if choice == 1:
+            findRoot()
+        elif choice == 2:
+            findAllRoots(-10, 10, 0.001)
+        elif choice == 3:
+            cont = False
+        else:
+            print("Nieprawidłowa wartość. Podaj liczbę 1, 2 lub 3.")
 
 
 

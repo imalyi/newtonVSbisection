@@ -33,6 +33,8 @@ class Newton(Method):
         return self.x_2, steps, "Newton"
 
     def _calc_next_x(self, x_prev: float, x: float) -> float:
+        if x==0 or x_prev ==0:
+            raise IterationLimit
         return x - ((self.key(x) * (x-x_prev)) / (self.key(x) - self.key(x_prev)))
 
     def _check_diff(self, x, x_prev):
@@ -41,9 +43,3 @@ class Newton(Method):
 
     def __str__(self):
         return 'Newton'
-
-
-if __name__ == "__main__":
-    print("Test example: x^2 - 2 = 0")
-    n = Newton(lambda x: (x*x -2), 1, 2, pow(10, -4), 30)
-    print(n.solution())
