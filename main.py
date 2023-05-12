@@ -24,6 +24,9 @@ def findRoot():
         if e<=0 or e>=1:
             print("Dokładność nie mieści się w przedziale (0;1)")
             e = 0
+        if e<math.pow(10,-15):
+            print("Dokładność musi być większa od 10^-15")
+            e = 0
     print("Wpisz a (początek przedziału)")
     while True:
         try:
