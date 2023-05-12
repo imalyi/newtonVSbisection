@@ -43,3 +43,6 @@ class Newton(Method):
 
     def __str__(self):
         return 'Newton'
+
+
+

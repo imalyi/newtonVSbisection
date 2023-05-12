@@ -46,18 +46,27 @@ def findRoot():
         except ValueError:
             print("Nieprawidłowy znak. Podaj liczbę zmiennoprzecinkową.")
             continue
+    while True:
+        try:
+            print("Podaj x1 (pierwsze przybliżenie")
+            x1 = float(input())
+            print("Podaj x2 (drugie przybliżenie)")
+            x2 = float(input())
+            break
+        except ValueError:
+            print("Nieprawidłowy znak. Podaj liczbę zmiennoprzecinkową")
     bisect = Bisection(key, [a, b], e)
     answer = bisect.solution()
     if answer[1]>0:
         print("Bisekcja: Pierwiastek równania to ", answer[0], ",obliczone w ", answer[1], " krokach.")
     try:
-        newton = Newton(key,a,b,e)
+        newton = Newton(key,x1,x2,e)
         answer2 = newton.solution()
         print("Newton: Pierwiastek równania to ", answer2[0], ",obliczone w ", answer2[1], " krokach.")
         if answer2[0]-answer[0]>e and answer[1]>0:
             print("Uwaga, prawdopodobnie na przedziale [",a,",",b,"] znajduje sie więcej niż jeden punkt zerowy funkcji.")
     except IterationLimit:
-        pass
+        print("Osiągnięty limit iteracji dla metody Newton")
 
 
 
@@ -98,7 +107,6 @@ def main():
             cont = False
         else:
             print("Nieprawidłowa wartość. Podaj liczbę 1, 2 lub 3.")
-
 
 
 if __name__ == "__main__":
