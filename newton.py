@@ -22,6 +22,7 @@ class Newton(Method):
         steps = 0
         while not self._check_diff(self.x_2, self.x_1):
             if steps > self.max_steps:
+                print("Metoda siecznych Newtona na podanym odcinku nie jest zbieżna.")
                 raise IterationLimit
             try:
                 tmp = self._calc_next_x(self.x_1, self.x_2)
