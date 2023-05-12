@@ -2,11 +2,9 @@ from method import Method
 
 
 class IterationLimit(Exception):
-    """Occurs when """
     pass
 
 class BadInterval(Exception):
-    "Occurs when divide by zero"
     pass
 
 
