@@ -26,5 +26,3 @@ class Bisection(Method):
             step = step + 1
         return c, step, "Bisekcja"
 
-    def generate_chart(self):
-        return
